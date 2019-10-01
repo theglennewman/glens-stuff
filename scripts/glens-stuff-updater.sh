@@ -4,21 +4,22 @@
 #
 # gnewman 2019.10.01
 
+# settings
 gitDir="${HOME}/github-projects/glens-stuff"
 configFiles=".bashrc .bash_profile .tmux.conf"
+scriptFiles="glens-stuff-updater.sh dedupe-photos"
 
 # make sure the repo doesn't have any pending changes first
-cd ${dstDir}
+cd ${gitDir}
 git status 2>&1 | grep -qs 'nothing to commit, working tree clean'
-#gitStatCode="$?"
-gitStatCode="0" # for now, while making changes, ignore the git status
+gitStatCode="$?"
 if [[ "${gitStatCode}" == "1" ]]; then
-  echo
-  echo "Git repo has changes pending: ${gitDir}"
-  echo "We refuse to continue. Commit changes first before pulling updates in."
-  echo
+  echo -e "\nGit repo has changes pending: ${gitDir}"
+  echo -e "\nWe refuse to continue. Commit changes first before updating.\n"
   exit 123
 fi
+
+echo -e "\n==== Updating repo: ${gitDir}\n"
 
 # arg 1 = source dir
 # arg 2 = dest dir
@@ -30,16 +31,15 @@ copyworker () {
   files="$@"
   echo "${srcDir} => ${dstDir}"
   for xx in ${files}; do
-  	src="${srcDir}/${xx}"
-  	dst="${dstDir}/${xx}"
-  	echo "  ${src} => ${dst}"
-  	cp ${src} ${dst}
+  	echo "  ${xx}"
+  	cp ${srcDir}/${xx} ${dstDir}/${xx}
   done
 }
 
 copyworker ${HOME} ${gitDir}/configs ${configFiles}
+copyworker ${HOME}/bin ${gitDir}/scripts ${scriptFiles}
 
 # finally...
 cd ${gitDir}
-echo
+echo -e "\n==== New status of ${gitDir}\n"
 git status
