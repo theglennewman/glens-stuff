@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Look for and delete duplicates in my photo backup dir. Uses fdupes program.
+#
+# gnewman 20191001
+
+# settings
+photoDir="/cygdrive/q/photos"
+
+# Outputs all args as an error message, then exits
+failout () {
+  errMsg="$@"
+  echo -e "\nERROR: ${errMsg}"
+  echo -e "Aborting...\n"
+  exit 123
+}
+
+# validate things
+command -v fdupes >/dev/null 2>&1 || failout "Looks like fdupes is not installed"
+
+# - should be able to just handle everything using fdupes
+# - but my photo dir is huge... Wonder if there's a way to break up the directories first?
+# - maybe just compare my "to organize" dirs one at a time with each subdir of the photo dir?
+# - may also need a permissions changer... since windows always screws up permissions and it seems I can't access some directories
+
+# Here's some notes on fdupes for now...
+# usage:
+#  fdupes [ options ] DIRECTORY ...
+# options:
+#  -r --recurse  (for every directory given follow subdirectories encountered within)
+#  -R --recurse: (for each directory given after this option follow subdirectories encountered within)
+#  -1 --sameline (list each set of matches on a single line)
+#  -d --delete   (prompt user for files to preserve, deleting all others)
