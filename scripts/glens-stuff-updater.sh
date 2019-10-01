@@ -22,4 +22,4 @@ if [[ "${gitStatCode}" == "1" ]]; then
   exit 123
 fi
 
-else "We'll totally copy stuff in now"
+echo "We'll totally copy stuff in now"
