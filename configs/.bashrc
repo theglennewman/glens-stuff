@@ -14,7 +14,8 @@
 
 export PATH="${PATH}:${HOME}/bin"
 
-alias gitset="cd ${HOME}/github-projects; ssh-add ${HOME}/.ssh/git"
+alias gitset="cd ${HOME}/github-projects/glens-stuff; ssh-add ${HOME}/.ssh/git"
+alias gitlog="git log --oneline --graph --decorate --all"
 
 # to be output in bash_profile
 aliasStr="(no aliases currently)"
