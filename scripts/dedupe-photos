@@ -15,7 +15,7 @@ failout () {
   exit 123
 }
 
-# validate things
+# make sure we can use fdupes
 command -v fdupes >/dev/null 2>&1 || failout "Looks like fdupes is not installed"
 
 # - should be able to just handle everything using fdupes
@@ -31,3 +31,24 @@ command -v fdupes >/dev/null 2>&1 || failout "Looks like fdupes is not installed
 #  -R --recurse: (for each directory given after this option follow subdirectories encountered within)
 #  -1 --sameline (list each set of matches on a single line)
 #  -d --delete   (prompt user for files to preserve, deleting all others)
+
+#### Let's try comparing individual dirs with the "to organize" dir... one at a time
+toOrgDir="${photoDir}/_toOrganize"
+dirsToCheck="2008 2010 2011 2012"
+
+echo "Our to sort dir is:"
+echo "  ${toOrgDir}"
+echo "We'll check for dupes there alongside each of these one at a time:"
+for xx in ${dirsToCheck}; do
+  curDir="${photoDir}/${xx}"
+  echo "  ${curDir}"
+done
+
+echo
+for xx in ${dirsToCheck}; do
+  curDir="${photoDir}/${xx}"
+  fdupeCmd="fdupes -rd ${toOrgDir} ${curDir}"
+  echo "Running command: ${fdupeCmd}"
+  ${fdupeCmd}
+  echo
+done
