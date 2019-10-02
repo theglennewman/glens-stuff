@@ -32,7 +32,7 @@ Branches:
   git checkout -b <new-branch-name>  => create and switch to new branch
 
 Other commands:
-  git remote -v  => display the fetch / push URLs for remotes, if multiple collaborators are involved they might be listed here
+  git remote -v  => display the fetch / push URLs for remotes
 
 Example: merging a branch into master:
   git checkout master
