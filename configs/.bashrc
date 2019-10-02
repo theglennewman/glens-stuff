@@ -31,9 +31,11 @@ export SSH_AUTH_SOCK="${gg}/.ssh-auth-sock"
 ssh-add -l > /dev/null 2>&1
 addCheckCd="$?"
 if [[ "${addCheckCd}" == "2" ]]; then
-  echo "No SSH Agent. Creating one now..."
-  if [ -f ${SSH_AUTH_SOCK} ]; then
+  if [ -e ${SSH_AUTH_SOCK} ]; then
+    echo "Bad SSH Agent. Deleting socket file, then re-creating the agent..."
     rm ${SSH_AUTH_SOCK}
+  else
+    echo "No SSH Agent. Creating one now..."
   fi
   eval $(ssh-agent -a ${SSH_AUTH_SOCK})
 fi
