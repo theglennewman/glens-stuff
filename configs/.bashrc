@@ -12,11 +12,29 @@
 #     - usually sources bashrc
 #     - output all you like
 
-export PATH="${PATH}:${HOME}/bin"
+gg="${HOME}"
+githubDir="${gg}/github-projects"
+gstuffDir="${githubDir}/glens-stuff"
 
-alias gitset="cd ${HOME}/github-projects/glens-stuff; ssh-add ${HOME}/.ssh/git"
+export PATH="${PATH}:${gg}/bin:${gstuffDir}/scripts"
+
+alias gogit="cd ${gstuffDir}"
+alias gitset="gogit; ssh-add ${gg}/.ssh/git"
 alias gitlog="git log --oneline --graph --decorate --all"
 
-# to be output in bash_profile
-aliasStr="(no aliases currently)"
+# Handy list for bash_profile to remind me of available aliases. Escaped
+# characters are allowed.
+aliasStr="Git aliases: gogit gitset gitlog"
+
+# Set or re-use ssh agent. (Works with Cygwin!)
+export SSH_AUTH_SOCK="${gg}/.ssh-auth-sock"
+ssh-add -l > /dev/null 2>&1
+addCheckCd="$?"
+if [[ "${addCheckCd}" == "2" ]]; then
+  echo "No SSH Agent. Creating one now..."
+  if [ -f ${SSH_AUTH_SOCK} ]; then
+    rm ${SSH_AUTH_SOCK}
+  fi
+  eval $(ssh-agent -a ${SSH_AUTH_SOCK})
+fi
 

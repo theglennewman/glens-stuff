@@ -12,10 +12,8 @@
 #     - usually sources bashrc
 #     - output all you like
 
-# environment
 source "${HOME}/.bashrc"
-eval $(ssh-agent -s) > /dev/null
 
-# aliasStr gets set in my bashrc
+# Reminder about my aliases. String is set in my bashrc.
 echo -e "\n  ${aliasStr}"
 
