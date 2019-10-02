@@ -1,67 +1,41 @@
 # Git / GitHub Notes
+I'm re-learning all the git quirks and syntax.
 
-List settings:
-git config --global -l
-  - you may get "unable to read config file" so just set a setting and try again
-git config --global user.name "theglennewman"
-
-I set my email to private, so GitHub provides an email for settings. Need to set this in my local "git config" settings. Probably not needed, but I also regenerated my ssh key with ssh-keygen to use the noreply email as the comment
-
-$ ssh-keygen -f github-20191001 -t rsa -b 4096 -C "<github-no-reply-email>"
+## Initial Config
+I set my email to private so GitHub provides a noreply email. If I set this in my local git config settings it will properly link my commits with my user profile in the GitHub UI. I also regenerated my ssh key with ssh-keygen to use the noreply email as the comment (though this is probably not necessary).
+```
+$ ssh-keygen -f <keyfilename> -t rsa -b 4096 -C "<github-no-reply-email>"
 $ git config --global user.name "theglennewman"
 $ git config --global user.email "<github-no-reply-email>"
 $ git config --global -l
-user.name=theglennewman
-user.email=<github-no-reply-email>
+```
 
-## Need to re-learn the git quirks...
+## Git cheatsheet
+```
+Status:
+  git status         => ah, yes, now I remember... this is used all the time
+  git diff           => diff files that aren't staged
+  git diff --staged  => diff staged files
+  git log --graph --decorate --oneline --all
+    => set an alias for this... try without --oneline
 
-See the diff of staged files:
-  git diff --staged
+Updates:
+  git pull
+  git commit -m "message for commit"
+  git push
+  git push --all origin  => push all branches to origin
 
-Or to see diffs of files that you haven't actually added for committing:
-  git diff
-Current changes to repo
-git status
- - oh, right, forgot about this...
- - shows stuff that's staged (to be committed)
- - also shows stuff that's not staged (but different from the branch)
- - remember that you can make changes to a file... and see in the status that there are pending changes in the file that still need to be changed
-git diff
- - show diffs for anything not yet staged
- - ignores any new files
-git diff --staged
- - show diffs for any staged files
+Branches:
+  git branch     => which branch am I on?
+  git branch -a  => list all remote and local branches
+  git checkout <branch-name>         => switch to different branch
+  git checkout -b <new-branch-name>  => create and switch to new branch
 
-Commit Tree
-git log --oneline --graph --decorate --all
- - I recall being able to customize this a whole bunch... but this is a good start
+Other commands:
+  git remote -v  => display the fetch / push URLs for remotes, if multiple collaborators are involved they might be listed here
 
-Updating the repo
-git commit -m "message of commit"
- - ah, classic!
-git push
- - don't forget to push it up
-git pull
- - and remember to get any changes
-
-Branch stuff
-git branch
- - check which branch you're on
-git branch -a
- - list all the remote and local branches
-git checkout <branch-name>
- - checkout a current branch
-git checkout -b <new-branch-name>
- - new branch!
-
-Merge latest stuff into current branch
-git checkout master
-git merge <other-branch-name>
-git push
-
-Origin stuff
-git remote -v
- - show the fetch / push URLs
- - my stuff will be simple since we're just pushing / pulling to github
- - but multiple collaborators may get listed here
+Example: merging a branch into master:
+  git checkout master
+  git merge <other-branch-name>
+  git push
+```
