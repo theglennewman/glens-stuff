@@ -2,10 +2,14 @@
 
 " Glen's vimrc!
 
-" Never really liked syntax highlighting since I'm colorblind. Can probably
-" adjust the colors better, but for now just turn off syntax.
+"just turn it off, could probably adjust colors better though
 syntax off
 
-" Show a few lines of context around cursor when scrolling
+"keep lines of context around cursor when scrolling
 set scrolloff=5
+
+" Other files for reference in /usr/share/vim/vim*/
+"   defaults.vim
+"   vimrc_example.vim
+"   (more in there as well)
 
