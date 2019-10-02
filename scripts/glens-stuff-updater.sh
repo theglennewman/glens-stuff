@@ -1,13 +1,18 @@
 #!/bin/bash
 
-# Copies various files to my local glens-stuff git repo and runs git status.
+# Copy various files to my glens-stuff git repo and run git status.
 #
 # gnewman 2019.10.01
 
 # settings
 gitDir="${HOME}/github-projects/glens-stuff"
-configFiles=".bashrc .bash_profile .tmux.conf"
-scriptFiles="glens-stuff-updater.sh dedupe-photos"
+configFiles=".bashrc .bash_profile .tmux.conf .vimrc"
+
+# Copying in confs makes sense, but copying in my scripts can get weird.
+# Especially if I'm updating this script... I think a better approach is to
+# just add my git repo's bin to my PATH when there's stuff in there I want
+# to run.
+#scriptFiles="glens-stuff-updater.sh dedupe-photos"
 
 # make sure the repo doesn't have any pending changes first
 cd ${gitDir}
@@ -21,9 +26,6 @@ fi
 
 echo -e "\n==== Updating repo: ${gitDir}\n"
 
-# arg 1 = source dir
-# arg 2 = dest dir
-# arg 3+ = files to copy
 copyworker () {
   srcDir="$1"
   dstDir="$2"
@@ -37,7 +39,9 @@ copyworker () {
 }
 
 copyworker ${HOME} ${gitDir}/configs ${configFiles}
-copyworker ${HOME}/bin ${gitDir}/scripts ${scriptFiles}
+
+# As noted above, let's skip the scripts...
+#copyworker ${HOME}/bin ${gitDir}/scripts ${scriptFiles}
 
 # finally...
 cd ${gitDir}
