@@ -30,6 +30,8 @@ Branches:
   git branch -a  => list all remote and local branches
   git checkout <branch-name>         => switch to different branch
   git checkout -b <new-branch-name>  => create and switch to new branch
+  git branch -d <branch-name>       => delete branch locally
+  git push -d origin <branch-name>  => delete branch on origin
 
 Other commands:
   git remote -v  => display the fetch / push URLs for remotes
