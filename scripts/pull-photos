@@ -1,19 +1,28 @@
 #!/bin/bash
 
-# Pull our photo dir from external drive to local Q spinny drive
-#	theglennewman . december 2015
-#	- updated for pull jan 2019
+# Pull photos off my external usb drive using rsync.
+#
+# TODO:
+# - add ability to specify "backup to external" vs "pull from external"
+#
+# 2019.10.02 add to git, update variable names for clarity
+# jan 2019   updated for pull
+# dec 2015   init
 
-src=/cygdrive/d/photo-bkup/photos/
-dst=/cygdrive/q/photos/
-cmd="rsync -rltDP $src $dst"
+driveUSB="/cygdrive/d"
+driveLocal="/cygdrive/q"
 
-echo -e "\nBacking up photos to the E drive"
+src="${driveUSB}/photo-bkup/photos/"
+dst="${driveLocal}/photos/"
+
+rsyncCmd="rsync -rltDP $src $dst"
+
+echo -e "\nBacking up photos..."
 echo -e "\n\tsource is: $src"
 echo -e "\tdestination is: $dst"
 
-echo -e "\nCommand is: $cmd"
-echo -e "\trunning..."
+echo -e "\nRunning command: $cmd"
+
 $cmd
 
 echo -e "\nAll done!\n"
