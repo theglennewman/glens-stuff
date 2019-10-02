@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Pull our photo dir from external drive to local Q spinny drive
+#	theglennewman . december 2015
+#	- updated for pull jan 2019
+
+src=/cygdrive/d/photo-bkup/photos/
+dst=/cygdrive/q/photos/
+cmd="rsync -rltDP $src $dst"
+
+echo -e "\nBacking up photos to the E drive"
+echo -e "\n\tsource is: $src"
+echo -e "\tdestination is: $dst"
+
+echo -e "\nCommand is: $cmd"
+echo -e "\trunning..."
+$cmd
+
+echo -e "\nAll done!\n"
+
