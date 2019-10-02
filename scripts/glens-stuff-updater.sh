@@ -24,14 +24,14 @@ if [[ "${gitStatCode}" == "1" ]]; then
   exit 123
 fi
 
-echo -e "\n==== Updating repo: ${gitDir}\n"
+echo -e "\n==== Updating repo: ${gitDir}/\n"
 
 copyworker () {
   srcDir="$1"
   dstDir="$2"
   shift 2
   files="$@"
-  echo "${srcDir} => ${dstDir}"
+  echo "${srcDir}/ => ${dstDir}/"
   for xx in ${files}; do
   	echo "  ${xx}"
   	cp ${srcDir}/${xx} ${dstDir}/${xx}
@@ -45,5 +45,6 @@ copyworker ${HOME} ${gitDir}/configs ${configFiles}
 
 # finally...
 cd ${gitDir}
-echo -e "\n==== New status of ${gitDir}\n"
+echo -e "\n==== New status of ${gitDir}/\n"
 git status
+
