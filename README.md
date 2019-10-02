@@ -14,6 +14,8 @@ Well wait... that's not right either. The bashrc should just handle the ssh agen
 
 Still, could be good to check and note if the identity isn't there. And we may actually want to clean up the identity... I've noticed I can close out cygwin entirely and my identity is still good. There's probably situations where that shouldn't be the case.
 
+Also... I bet if I reboot and come back, the agent file will still be there, so it will get picked up. This would be handled if we confirm PID is actually a PID.
+
 Should we do these checks?
 - pid in the SSH_AGENT_PID is actually a running process
 - socket file doesn't exist (already gets checked in bashrc... but what about in my aliases that add the git identity?)
