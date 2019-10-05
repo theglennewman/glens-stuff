@@ -28,15 +28,16 @@ aliasStr="Git aliases: gogit gitset gitlog"
 
 # Set or re-use ssh agent. (Works with Cygwin!)
 export SSH_AUTH_SOCK="${gg}/.ssh-auth-sock"
-ssh-add -l > /dev/null 2>&1
-addCheckCd="$?"
-if [[ "${addCheckCd}" == "2" ]]; then
+agentIDs="$(ssh-add -l 2>&1)"
+if [[ "$?" == "2" ]]; then
   if [ -e ${SSH_AUTH_SOCK} ]; then
-    echo "Bad SSH Agent. Deleting socket file, then re-creating the agent..."
+    echo "SSH agent stale. Re-creating it."
     rm ${SSH_AUTH_SOCK}
   else
-    echo "No SSH Agent. Creating one now..."
+    echo "No SSH agent. Creating one."
   fi
   eval $(ssh-agent -a ${SSH_AUTH_SOCK})
+else
+  echo -e "SSH agent ready.\n${agentIDs}"
 fi
 
