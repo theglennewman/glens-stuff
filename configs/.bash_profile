@@ -1,7 +1,7 @@
 # ~/.bash_profile
 
 # Glen's bash_profile
-
+#
 # remember bashrc vs bash_profile...
 #   bashrc
 #     - executed by interactive shells
@@ -14,6 +14,8 @@
 
 source "${HOME}/.bashrc"
 
-# Reminder about my aliases. String is set in my bashrc.
-echo -e "\n  ${aliasStr}"
+# Messages set in bashrc
+echo -e "${agentMsg}"
+echo
+echo -e "${aliasMsg}"
 
