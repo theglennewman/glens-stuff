@@ -23,19 +23,28 @@ alias gitset="gogit; ssh-add ${gg}/.ssh/git"
 alias gitlog="git log --oneline --graph --decorate --all"
 aliasMsg="Git aliases: gogit gitset gitlog"
 
+echo -e "env before checking agent...\n'$(env | grep 'SSH_')'"
+
 # Set or re-use ssh agent. (Works with Cygwin!)
 export SSH_AUTH_SOCK="${gg}/.ssh-auth-sock"
+export AGENT_ENV="${gg}/.ssh-agent-env"
+echo "eval agent env: ${AGENT_ENV}"
+eval $(<${AGENT_ENV})
+echo "check for ids"
 agentIDs="$(ssh-add -l 2>&1)"
-agentMsg=""
 if [[ "$?" == "2" ]]; then
+  echo "Error connecting to SSH agent.
   if [ -e ${SSH_AUTH_SOCK} ]; then
-    agentMsg="${agentMsg}SSH agent stale. Re-creating it. "
+    # file already exists though
+    echo "SSH_AUTH_SOCK exists - delete and recreate."
     rm ${SSH_AUTH_SOCK}
   else
-    agentMsg="${agentMsg}No SSH agent. Creating one. "
+    echo "Creating SSH_AUTH_SOCK (it didn't exist)."
   fi
-  eval $(ssh-agent -a ${SSH_AUTH_SOCK})
+  ssh-agent -a ${SSH_AUTH_SOCK} > ${AGENT_ENV}
+  eval $(<${AGENT_ENV})
 else
-  agentMsg="${agentMsg}SSH agent ready.\n${agentIDs} "
+  echo -e "SSH agent ready.\n${agentIDs}"
 fi
 
+echo -e "env AFTER checking agent...\n'$(env | grep 'SSH_')'"
