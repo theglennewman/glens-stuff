@@ -15,13 +15,24 @@
 gg="${HOME}"
 githubDir="${gg}/github-projects"
 gstuffDir="${githubDir}/glens-stuff"
+gnvpDir="${githubDir}/gnvp"
+projDir="${gnvpDir}"
 
 export PATH="${PATH}:${gg}/bin:${gstuffDir}/scripts"
 
-alias gogit="cd ${gstuffDir}; git status"
-alias gitset="gogit; ssh-add ${gg}/.ssh/git"
-alias gitlog="git log --oneline --graph --decorate --all"
-aliasMsg="Git aliases: gogit gitset gitlog"
+gogit() {
+  echo $projDir
+  cd $projDir
+  git status
+}
+gitadd() {
+  gogit
+  ssh-add ${gg}/.ssh/git
+}
+gitlog() {
+  git log --oneline --graph --decorate --all
+}
+aliasMsg="Git aliases: gogit gitadd gitlog"
 
 echo -e "env before checking agent...\n'$(env | grep 'SSH_')'"
 
@@ -33,13 +44,13 @@ eval $(<${AGENT_ENV})
 echo "check for ids"
 agentIDs="$(ssh-add -l 2>&1)"
 if [[ "$?" == "2" ]]; then
-  echo "Error connecting to SSH agent.
+  echo "Error connecting to SSH agent."
   if [ -e ${SSH_AUTH_SOCK} ]; then
     # file already exists though
     echo "SSH_AUTH_SOCK exists - delete and recreate."
     rm ${SSH_AUTH_SOCK}
   else
-    echo "Creating SSH_AUTH_SOCK (it didn't exist)."
+    echo "Creating SSH_AUTH_SOCK - it didn't exist"
   fi
   ssh-agent -a ${SSH_AUTH_SOCK} > ${AGENT_ENV}
   eval $(<${AGENT_ENV})
