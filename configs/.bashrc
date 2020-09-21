@@ -12,27 +12,32 @@
 #     - usually sources bashrc
 #     - output all you like
 
-gg="${HOME}"
-githubDir="${gg}/github-projects"
-gstuffDir="${githubDir}/glens-stuff"
-gnvpDir="${githubDir}/gnvp"
-projDir="${gnvpDir}"
+git_dir="${HOME}/github-projects"
+proj_glens="$git_dir/glens-stuff"
+flamtap="$git_dir/flamtap"
 
-export PATH="${PATH}:${gg}/bin:${gstuffDir}/scripts"
+current_project="$flamtap"
+export PATH="${PATH}:${HOME}/bin:${proj_glens}/scripts"
 
+add() {
+  echo "Add 'identity' symlink."
+  ssh-add ${gg}/.ssh/identity
+}
 gogit() {
-  echo $projDir
-  cd $projDir
+  echo "Move to current project: $current_project"
+  cd $current_project
   git status
 }
 gitadd() {
+  echo "Run: gogit"
   gogit
+  echo "Add 'git' symlink."
   ssh-add ${gg}/.ssh/git
 }
 gitlog() {
   git log --oneline --graph --decorate --all
 }
-aliasMsg="Git aliases: gogit gitadd gitlog"
+aliasMsg="Aliases: add gogit gitadd gitlog"
 
 echo -e "env before checking agent...\n'$(env | grep 'SSH_')'"
 
