@@ -12,11 +12,11 @@ for numbah in the_array:
 ```
 
 # Running Python Code
-Ez Pz. It's gotta be the first line (good ol' shebang!) to be the interpreter...
-Or you gotta run it with your python command.
 ```
+Script? Use the interpreter (shebang!)
 #!/usr/bin/python3.7
 
+Or you can exclude the interpreter in your file and just run it...
 $ /usr/bin/python3.7 file.py
 $ python file.py
 
