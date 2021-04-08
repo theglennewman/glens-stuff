@@ -13,7 +13,7 @@ Then the rustup install per the Rust docs:
 I spent more time setting up the VM than I did setting up Rust...
 ```
 
-### cargo
+## cargo commands
 ```
 $ cargo new project_name
 $ cargo check
@@ -31,9 +31,7 @@ cargo compiles things to the "target/debug" or "target/release" dirs
 - but the downside to setting this to /tmp/ is that every cargo project builds into these dirs... so I imagine weirdness can happen if this doesn't get cleaned upgit sta
 
 ## statements vs expressions
-Oh my gosh this is wild...
-
-Rust is "expression-based"
+Rust is "expression-based." This will take some getting used to:
 * statements => instructions that perform an action, do not return a value
 * expressions => evaluate to a resulting value
 
@@ -44,14 +42,13 @@ let x = 5;
 # but check this block! overall, this block is an expression
 {
   let x = 3; //this here is a statement
-  x + 1 //NO SEMICOLON... so this is the evaluation that returns the value
+  x + 1      //NO SEMICOLON! this is the evaluation that returns the value
 }
 ```
 
 if's are expressions...
 else's are expressions...
-
-and we can use code like this...
+which allows us to do this
 ```
 let condition = true;                           //a statement
 let number = if condition { 5 } else { 100 };   //statement that assigns result of the `if` expression to variable `number`
@@ -69,10 +66,8 @@ fn main() {
 }
 ```
 
-## Rust syntax
-### the really important stuff
+## if / else if / else
 ```
-// if / else if / else
 if number % 4 == 0 {
     println!("number is divisible by 4");
 } else if number % 3 == 0 {
@@ -84,7 +79,7 @@ if number % 4 == 0 {
 }
 ```
 
-### some less-important stuff
+## bonus unimportant stuff
 ```
 # sleep for 1 second...
 use std::time::Duration;
