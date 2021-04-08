@@ -2,13 +2,16 @@
 Yay Rust! Let's learn rust.
 
 ## Setting up Rust
-Got Debian on a VM, then:
+```
+Got Debian on a VM, then installed:
   # apt install curl build-essential
-  --> and some others for maybe other reasons: vim git open-vm-tools
-And ran the rustup install:
+  -> plus some others: vim git open-vm-tools
+
+Then the rustup install per the Rust docs:
   $ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 
-Most of my issues were with setting up the dang VM...
+I spent more time setting up the VM than I did setting up Rust...
+```
 
 ### cargo
 ```
