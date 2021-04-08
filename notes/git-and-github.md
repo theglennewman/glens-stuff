@@ -41,3 +41,22 @@ Example: merging a branch into master:
   git merge <other-branch-name>
   git push
 ```
+## Aliases
+### git log
+```
+format_str="%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset"
+
+# bash function
+gitlog() {
+xtra_args="$@"
+#git log --graph --pretty=format:"${format_str}" --abbrev-commit ${xtra_args}
+
+# all branches... and without abbrev-commit
+}
+
+# git alias
+git config --global alias.lg "log --color --graph --pretty=format:'${format_str}' --abbrev-commit"
+
+# use alias (you can add args to the git log)
+git lg -p
+```
