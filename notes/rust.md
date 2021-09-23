@@ -79,6 +79,29 @@ if number % 4 == 0 {
 }
 ```
 
+## Debugging
+Use `{:?}` for a Debug, or `{:#?}` for a pretty-printed debug
+```
+use std::fmt::Debug;
+fn show_debugs<T: Debug>(label: &str, object: &T) {
+    println!();
+    println!("{}: regular debug\n{:?}", label, object);
+    println!("{}: pretty printed debug\n{:#?}", label, object);
+}
+fn main() {
+    let int = 123;
+    show_debugs("integer", &int);
+    let flt = 400.38;
+    show_debugs("floating point", &flt);
+    let bool = true;
+    show_debugs("boolean", &bool);
+    let arr = [1, 2, 3];
+    show_debugs("array", &arr);
+    let tup = (bool, "str", arr);
+    show_debugs("tuple", &tup);
+}
+```
+
 ## bonus unimportant stuff
 ```
 # sleep for 1 second...
