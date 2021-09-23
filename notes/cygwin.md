@@ -2,32 +2,35 @@
 I like Windows. But I do like Linux better. So I really like Cygwin.
 
 ## Packages
-Packages I like to install via the Cygwin Installer. Remember in the package selector you can switch the **View** dropdown to **Picked** to see the selected packages instead of the full list of dependencies.
+In the **view** dropdown...
+* select **picked** for installed packages.
+* select **pending** for packages you chose in this session (or packages with updates)
+* remember to clear the search bar when swapping between views
 
-These are the essential packages I like to include every time I install cygwin:
+Essential Packages:
 ```
-bind-utils
+vim - vim-minimal comes with cygwin Base, vim is better
+bind-utils - gets you dig
 git
-ping
 rsync
 tmux
-vim (if you skip vim you get vim-minimal as part of Base)
 ```
 
-Optional packages I don't necessarily need on everything:
+Other packages:
 ```
+ping - don't remember why... maybe ping wasn't installed one time? or I wanted to avoid the windows exe?
 fdupes (for finding duplicate files)
 ```
 
 ## Auto launch tmux
-When I launch Cygwin I like jumping right into tmux. This will attach to a running session or create one.
+Auto attach to a tmux session, or create one, as soon as cygwin is started.
 
-In the terminal launcher (I usually have this pinned to my task bar), set this as the Target:
+Modify the cygwin launcher (in windows, pinned to taskbar) and change the Target:
 ```
 C:\cygwin\bin\mintty.exe -i /Cygwin-Terminal.ico /cygdrive/c/Users/tool/cygwin-start.sh
 ```
 
-And then put this into cygwin-start.sh:
+And then in cygwin-start.sh:
 ```
 #!/bin/bash
 
