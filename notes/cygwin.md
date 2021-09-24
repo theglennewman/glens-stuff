@@ -39,3 +39,11 @@ And then in cygwin-start.sh:
 
 /bin/tmux a || /bin/tmux
 ```
+
+## Modifying HOME
+NOTE: Cygwin recommends using nss instead of /etc/passwd
+
+- if /etc/passwd doesn't exist...
+- `mkpasswd` generates output for all users
+- `mkpasswd -c` for just current user
+- redirect to /etc/passwd, then modify the home dir field
