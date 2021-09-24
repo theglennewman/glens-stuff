@@ -7,19 +7,16 @@ In the **view** dropdown...
 * select **pending** for packages you chose in this session (or packages with updates)
 * remember to clear the search bar when swapping between views
 
-Essential Packages:
 ```
-vim - vim-minimal comes with cygwin Base, vim is better
-bind-utils - gets you dig
+bind-utils (includes dig)
+curl
+fupes (for finding duplicate files)
 git
+p7zip
+ping (don't remember, maybe I didn't like the windows ping?)
 rsync
 tmux
-```
-
-Other packages:
-```
-ping - don't remember why... maybe ping wasn't installed one time? or I wanted to avoid the windows exe?
-fdupes (for finding duplicate files)
+vim (cygwin base install only has vim-minimal)
 ```
 
 ## Auto launch tmux
