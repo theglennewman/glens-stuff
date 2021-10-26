@@ -13,13 +13,17 @@ settings:
 answers:
     system: System is configured as intended
 
-stig_rules:
-rule:
-    id_long: Vuln ID 1234  STIG 1234  Other STUFF AAAAAA
-    id_short: 1234
-    description: "Description goes here"
-    expect: open
-    note: Additional notes can be added
-    answer: system
-    answer_str: Additionally, though, this is a system.
-    cmd: df -h
+rules:
+    "Vuln ID 1234  STIG 1234  Other STUFF AAAAAA":
+        description: "Description goes here"
+        expect: open
+        note: Additional notes can be added
+        answer: system
+        answer_str: Additionally, though, this is a system.
+        cmd: df -h
+    "Vuln 1333  STIG 1234  Other STUFF AAAAAA":
+        description: "desc"
+        expect: naf
+        answer: system
+        answer_str: Additionally, though, this is a system.
+        cmd: du -sh

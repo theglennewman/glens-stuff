@@ -21,6 +21,9 @@ Filesystem                      Size  Used Avail Use% Mounted on
 
 """)
 
+def try_a_print():
+    print("try a print")
+
 def bomb(msg):
     err(msg)
     quit(200)
@@ -28,22 +31,26 @@ def bomb(msg):
 def err(msg):
     print("ERROR: " + str(msg))
 
+CONF_FILE = "stigcmd_example.yml"
 CONF = None
-def load_yaml_file(stig_cmd_yml):
+def conf(debug=False):
     global CONF
     if CONF is None:
-        print("Loading yaml: " + stig_cmd_yml)
-        with open(stig_cmd_yml, 'r') as ff:
-            CONF = yaml.safe_load(ff)
-    print(str(CONF))
+        print("Loading yaml: " + CONF_FILE)
+        with open(CONF_FILE, 'r') as ymlfile:
+            CONF = yaml.safe_load(ymlfile)
+    if debug:
+        print("DEBUG... " + str(CONF))
+    return CONF
 
-def get_val(key):
-    if CONF is None:
-        bomb("Trying to fetch from yaml, but CONF is NONE")
-    print("get conf: " + key)
-    value = CONF[key]
-    print("value is: " + str(value))
+def settings(): return conf()["settings"]
+def answers(): return conf()["answers"]
+def rules(): return conf()["rules"]
 
 ### MAIN
-load_yaml_file("stigcmd_example.yml")
-get_val('settings')
+rules_obj = rules()
+print(str(rules_obj))
+for rule_name in rules():
+    rule = rules()[rule_name]
+    desc = rule["description"]
+    print("  -> " + desc)
