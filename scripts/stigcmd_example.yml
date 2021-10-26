@@ -1,0 +1,25 @@
+# modify the settings values, but leave the keys alone
+settings:
+    stig_guide: RHEL7 v3r4
+    #term_ps1: "[root@\h]# "
+    term_ps1: "[root@host.fqdn]# "
+    finding: This is a finding
+    not_finding: This is NAF
+    answer:
+        head: "----- ANSWER:"
+        foot: "-----"
+
+# templates for your answers, set these up however you want
+answers:
+    system: System is configured as intended
+
+stig_rules:
+rule:
+    id_long: Vuln ID 1234  STIG 1234  Other STUFF AAAAAA
+    id_short: 1234
+    description: "Description goes here"
+    expect: open
+    note: Additional notes can be added
+    answer: system
+    answer_str: Additionally, though, this is a system.
+    cmd: df -h
